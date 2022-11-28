@@ -1,0 +1,41 @@
+<form [formGroup]="archiveForm" (submit)="save()">
+    <div class="modal-header">
+        <h4 class="modal-title">PACS Archive Connection Settings</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss(false)">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="mb-3">
+            <label for="ArchiveName" class="form-label">PACS Archive Name</label>
+            <input formControlName="ArchiveName" type="text" class="form-control" id="ArchiveName"
+                placeholder="PACS Name">
+        </div>
+        <div class="mb-3">
+            <label for="QIDO_RS_BASE_URL" class="form-label">QIDO-RS Base URL</label>
+            <input formControlName="QIDO_RS_BASE_URL" type="text" class="form-control" id="QIDO_RS_BASE_URL"
+                placeholder="E.g. http://<pacs-host>:8080/dcm4chee-arc/aets/DCM4CHEE/rs">
+        </div>
+        <div class="mb-3">
+            <label for="STOW_RS_BASE_URL" class="form-label">STOW-RS Base URL</label>
+            <input formControlName="STOW_RS_BASE_URL" type="text" class="form-control" id="STOW_RS_BASE_URL"
+                placeholder="E.g. http://<pacs-host>:8080/dcm4chee-arc/aets/DCM4CHEE/rs">
+        </div>
+        <div class="mb-3">
+            <label for="WADO_RS_BASE_URL" class="form-label">WADO-RS Base URL</label>
+            <input formControlName="WADO_RS_BASE_URL" type="text" class="form-control" id="WADO_RS_BASE_URL"
+                placeholder="E.g. http://<pacs-host>:8080/dcm4chee-arc/aets/DCM4CHEE/rs">
+        </div>
+        <div class="mb-3">
+            <label for="WADO_URI" class="form-label">WADO-URI</label>
+            <input formControlName="WADO_URI" type="text" class="form-control" id="WADO_URI"
+                placeholder="E.g. http://<pacs-host>:8080/dcm4chee-arc/aets/DCM4CHEE/wado">
+        </div>
+
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="activeModal.close(false)">Cancel</button>
+        <button type="submit" class="btn btn-primary" [disabled]="!archiveForm.valid">{{ !archive.ID ? 'Add' : 'Edit' }}</button>
+    </div>
+</form>

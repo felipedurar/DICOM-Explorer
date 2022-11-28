@@ -1,0 +1,66 @@
+<div style="background-color: #333333; width: 100%; height: 100%; color: white;">
+
+    <!-- As a heading -->
+    <nav class="navbar navbar-dark" style="background-color: #222222;">
+        <div class="container-fluid">
+            <span class="navbar-brand mb-0 h1">Study Viewer</span>
+            <div *ngIf="!loading">
+                {{ study?.StudyInstanceUID }}
+            </div>
+            <!-- <div style="flex-grow: 1;">
+                <div style="padding-left: 20px;">
+                    Test
+                </div>
+            </div> -->
+            <div class="d-flex">
+                <!-- <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"> -->
+                <button class="btn btn-secondary" type="button" (click)="back()">Back</button>
+            </div>
+        </div>
+    </nav>
+
+    <div *ngIf="!loading" style="display: flex; flex-direction: row; height: calc(100% - 56px);">
+        <div style="width: 300px; height: 100%; background-color: #444444; overflow-y: scroll;">
+
+            <div class="serie-container" *ngFor="let cSerie of series; let i = index">
+                <div class="serie-img-container" style="width: 100%; height: 100%; background-color: black;" (click)="loadSerie(i)">
+                    <img [src]="cSerie.ImagePreviewURL" (load)="cSerie.ImagePreviewLoaded = true" alt="" style="width: 100%; height: 100%; object-fit: cover;"
+                        [style.display]="cSerie.ImagePreviewLoaded ? 'block' : 'none'">
+                    <div style="display: flex; justify-content: center; justify-items: center; width: 100%; align-items: center; height: 100%;" *ngIf="!cSerie.ImagePreviewLoaded">
+                        <div class="spinner-border text-light" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div id="viewport" style="display: flex; flex-direction: column; height: 100%; flex-grow: 1; background-color: #555555;" *ngIf="!!currentSerie">
+            <div style="width: 100%; height: 100%; background-color: black;">
+                <img [src]="currentImageUrl" alt="" style="width: 100%; height: 100%; position: relative; left: 0px; top: 0px; object-fit: contain;">
+                <div style="width: 100%; height: 110px; padding: 10px; position: relative; bottom: 110px; color: gray;">
+                    Instances: <br>
+                    <input type="range" min="0" [max]="currentSerie.instances.length - 1" [value]="cInstance" class="slider" id="instances" 
+                        style="width: 100%;" #ref (input)="instanceChange(ref.value)"><br>
+                    <div *ngIf="!!currentSerie.instances[cInstance]">
+                        <div *ngIf="currentSerie.instances[cInstance].NumberOfFrames != -1">
+                            Frames: <br>
+                            <input type="range" min="1" [max]="currentSerie.instances[cInstance].NumberOfFrames" value="1" class="slider" id="instances" 
+                                style="width: 100%;" #ref2 (input)="frameChange(ref2.value)">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div style="display: flex; justify-content: center; justify-items: center; width: 100%; align-items: center; height: 100%;"
+        *ngIf="loading">
+        <div class="spinner-border text-light" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+</div>

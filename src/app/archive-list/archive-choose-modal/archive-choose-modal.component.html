@@ -1,0 +1,23 @@
+<div class="modal-header">
+    <h4 class="modal-title">Select the PACS Archive</h4>
+    <button type="button" class="btn" aria-label="Close" (click)="addArchive()">
+        <i class="fas fa-plus"></i>
+    </button>
+</div>
+<div class="modal-body" style="height: 300px; overflow-y: scroll; padding: 0;">
+
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item pacs-archive-item" *ngFor="let cArchive of archiveList; let i = index" (click)="openArchive(cArchive)">
+            {{ cArchive.ArchiveName }}
+            <div style="float: right;">
+                <button class="btn btn-sm btn-danger" (click)="deleteArchive(cArchive, i, $event);">Delete</button>
+                <button class="btn btn-sm btn-primary ml-2" (click)="editArchive(cArchive, i, $event)">Edit</button>
+            </div>
+        </li>
+    </ul>
+
+</div>
+<!-- <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="activeModal.close('Close click')"
+        [disabled]="true">Connect</button>
+</div> -->
